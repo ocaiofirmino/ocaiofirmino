@@ -14,7 +14,7 @@ Estudo **Análise e Desenvolvimento de Sistemas na UNISUAM** e tenho foco em des
 
 <img src="assets/ferramentas.svg" width="100%" alt="Ferramentas que já uso: VS Code, Git, GitHub, Terminal/PowerShell, npm, Vite, Vercel, Excel e Linux. Logos em âmbar." />
 
-<img src="assets/estudando.svg" width="100%" alt="Estudando agora: TypeScript, React, Tailwind CSS, Power BI e PostgreSQL. Logos em âmbar." />
+<img src="assets/estudando.svg" width="100%" alt="Estudando agora: TypeScript, React, Tailwind CSS, Power BI, PostgreSQL e Node.js. Logos em âmbar." />
 
 <img src="assets/projetos.svg" width="100%" alt="Projetos em destaque" />
 
