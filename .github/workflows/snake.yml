@@ -28,6 +28,39 @@ jobs:
           outputs: |
             dist/github-snake.svg?palette=github-dark&color_snake=%23f0b84a&color_dots=%23161b22,%230e4429,%23006d32,%2326a641,%2339d353
 
+      - name: Integrar animação à moldura do terminal
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          svg_ns = "http://www.w3.org/2000/svg"
+          ET.register_namespace("", svg_ns)
+          tag = lambda name: f"{{{svg_ns}}}{name}"
+          path = Path("dist/github-snake.svg")
+          snake = ET.fromstring(path.read_text())
+          _, _, width, height = map(float, snake.attrib["viewBox"].split())
+          frame_height = height * 930 / width
+          frame = ET.Element(tag("svg"), {
+              "viewBox": f"0 0 1000 {frame_height:g}",
+              "width": "1000", "height": f"{frame_height:g}",
+              "role": "img",
+          })
+          ET.SubElement(frame, tag("title")).text = "Cobrinha âmbar nas contribuições de Caio Firmino"
+          ET.SubElement(frame, tag("rect"), {
+              "width": "1000", "height": f"{frame_height:g}", "fill": "#0d1117",
+          })
+          ET.SubElement(frame, tag("path"), {
+              "d": f"M1 0v{frame_height:g}M999 0v{frame_height:g}",
+              "stroke": "#30363d", "fill": "none",
+          })
+          snake.attrib.update({
+              "x": "35", "y": "0", "width": "930", "height": f"{frame_height:g}",
+          })
+          frame.append(snake)
+          path.write_text(ET.tostring(frame, encoding="unicode") + "\n")
+          PY
+
       - name: Publicar animação na branch output
         uses: crazy-max/ghaction-github-pages@df5cc2bfa78282ded844b354faee141f06b41865 # v4
         with:
